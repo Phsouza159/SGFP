@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ObjectValues\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="prmToolkit.NotificationPattern" Version="1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Mensage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Mensage.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Mensage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mensage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
