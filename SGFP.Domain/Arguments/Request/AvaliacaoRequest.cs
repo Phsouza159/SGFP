@@ -9,7 +9,7 @@ namespace SGFP.Domain.Arguments.Request
 
         }
 
-        public AvaliacaoRequest(Guid id, double nota, string texto)
+        public AvaliacaoRequest(Guid id, int nota, string texto)
         {
             Id = id;
             Nota = nota;
@@ -18,7 +18,7 @@ namespace SGFP.Domain.Arguments.Request
 
         public Guid Id { get;  set; }
 
-        public double Nota { get;  set; }
+        public int Nota { get;  set; }
 
         public string Texto { get;  set; }
     }

@@ -4,6 +4,11 @@ namespace SGFP.Domain.Arguments.Request
 {
     public class MaoDeObraRequest
     {
+        public MaoDeObraRequest()
+        {
+
+        }
+
         public MaoDeObraRequest(Guid id, string tipoMaoObra, string nome, double valor, double jornadaTrabalho, double valorHoraExtra, double limiteHoraExtra)
         {
             Id          = id;

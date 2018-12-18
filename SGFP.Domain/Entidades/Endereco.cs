@@ -1,19 +1,30 @@
-﻿using System;
+﻿using prmToolkit.NotificationPattern;
+using SGFP.Domain.Arguments.Request;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SGFP.Domain.Entidades
 {
-    public class Endereco
+    public class Endereco : Notifiable
     {
-        public Endereco(Guid id, string cEP, string andress, string municipio, string complemento, Cidade cidade)
+        public Endereco(EnderecoRequest enderecoRequest)
         {
-            Id = id;
-            CEP = cEP;
-            Andress = andress;
-            Municipio = municipio;
-            Complemento = complemento;
-            Cidade = cidade;
+            Id          = enderecoRequest.Id;
+            CEP         = enderecoRequest.CEP;
+            Andress     = enderecoRequest.Andress;
+            Municipio   = enderecoRequest.Municipio;
+            Complemento = enderecoRequest.Complemento;
+            Cidade      = enderecoRequest.Cidade;
+
+            new AddNotifications<Endereco>(this)
+                .IfNull(p => p.CEP)
+                .IfLengthLowerThan(p => p.CEP, 9)
+                .IfNull(p => p.Andress)
+                .IfNull(p => p.Municipio)
+                .IfNull(p => p.Complemento)
+                .IfNull(p => p.Cidade);
+
         }
 
         public Guid Id { get; private set; }

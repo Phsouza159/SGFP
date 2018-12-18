@@ -5,6 +5,11 @@ namespace SGFP.Domain.Arguments.Request
 {
     public class CarroRequest
     {
+        public CarroRequest()
+        {
+
+        }
+
         public CarroRequest(Guid id, Pessoa dono, string placa, string chassi, string cor, string marca, string modelo, DateTime anoFabricao)
         {
             Id = id;

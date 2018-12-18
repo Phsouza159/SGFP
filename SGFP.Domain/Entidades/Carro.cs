@@ -1,4 +1,5 @@
-﻿using SGFP.Domain.Arguments.Request;
+﻿using prmToolkit.NotificationPattern;
+using SGFP.Domain.Arguments.Request;
 using SGFP.Domain.Entidades.Base;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace SGFP.Domain.Entidades
 {
-    public class Carro
+    public class Carro : Notifiable
     {
         public Carro(CarroRequest carroRequest)
         {
@@ -18,6 +19,18 @@ namespace SGFP.Domain.Entidades
             Marca       = carroRequest.Marca;
             Modelo      = carroRequest.Modelo;
             AnoFabricao = carroRequest.AnoFabricao;
+
+
+            new AddNotifications<Carro>(this)
+                       .IfNull(p => p.Dono)
+                       .IfNull(p => p.Placa)
+                       .IfLengthLowerThan(p => p.Placa, 8 )
+                       .IfNull(p => p.Chassi)
+                       .IfLengthLowerThan(p => p.Chassi, 16 )
+                       .IfNull(p => p.Cor)
+                       .IfNull(p => p.Marca)
+                       .IfNull(p => p.Modelo)
+                       .IfNull(p => p.AnoFabricao);
         }
 
         public Guid Id { get; private set; }

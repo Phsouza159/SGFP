@@ -1,6 +1,7 @@
 ﻿using prmToolkit.NotificationPattern;
 using SGFP.Domain.Arguments.Request;
 using System;
+
 namespace SGFP.Domain.Entidades.Base
 {
     public class Pessoa : Notifiable

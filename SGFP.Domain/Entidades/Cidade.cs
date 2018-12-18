@@ -4,6 +4,11 @@ namespace SGFP.Domain.Entidades
 {
     public class Cidade
     {
+        public Cidade()
+        {
+
+        }
+
         public Cidade(Guid id, string nome, Estado estado)
         {
             Id = id;

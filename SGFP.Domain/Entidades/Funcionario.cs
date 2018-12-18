@@ -1,4 +1,5 @@
-﻿using SGFP.Domain.Arguments.Request;
+﻿using prmToolkit.NotificationPattern;
+using SGFP.Domain.Arguments.Request;
 using SGFP.Domain.Entidades.Base;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace SGFP.Domain.Entidades
             : base(funcionarioRequest)
         {
             Categoria = funcionarioRequest.Categoria;
+
+            new AddNotifications<Funcionario>(this)
+                    .IfEqualsZero(p => p.Categoria);
         }
 
         public int Categoria { get; private set; }

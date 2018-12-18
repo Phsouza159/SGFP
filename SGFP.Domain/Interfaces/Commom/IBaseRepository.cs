@@ -4,9 +4,9 @@ namespace SGFP.Domain.Interfaces.Commom
 {
     public interface IBaseRepository<T> where T : class
     {
-       void add(object ob);
+       void add(T ob);
 
-       bool Update(object ob);
+       bool Update(T ob);
 
        bool IdExist(int id);
 

@@ -18,6 +18,8 @@ namespace SGFP.Domain.Entidades
                 : base(clienteRequest)
         {
             Carro = clienteRequest.Carro;
+
+            Avaliacao = clienteRequest.Avaliacao;
         }
 
         public Carro Carro { get; private set; }

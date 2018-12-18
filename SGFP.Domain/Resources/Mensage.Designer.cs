@@ -59,5 +59,14 @@ namespace SGFP.Domain.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O elemento {0} está Vazio!.
+        /// </summary>
+        internal static string X0_VAZIO {
+            get {
+                return ResourceManager.GetString("X0_VAZIO", resourceCulture);
+            }
+        }
     }
 }
