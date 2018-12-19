@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace prmToolkit.NotificationPattern
 {
     public interface INotifiable : IDisposable
     {
+        [NotMapped]
         IReadOnlyCollection<Notification> Notifications { get; }
 
         /// <summary>

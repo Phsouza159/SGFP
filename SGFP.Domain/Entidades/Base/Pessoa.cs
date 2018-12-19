@@ -4,7 +4,7 @@ using System;
 
 namespace SGFP.Domain.Entidades.Base
 {
-    public class Pessoa : Notifiable
+    public abstract class Pessoa : Notifiable
     {
         public Pessoa()
         {
@@ -27,6 +27,7 @@ namespace SGFP.Domain.Entidades.Base
                 .IfNotCpf(p => p.CPF, "Informe um CPF válido")
                 .IfNull(p => p.RG, "Informe o RG valido")
                 .IfLengthLowerThan(p => p.RG, 7, "Informe o RG valido com 8 caracters");
+            
         }
 
         public Guid Id { get; private set; }

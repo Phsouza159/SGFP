@@ -8,6 +8,7 @@ namespace SGFP.Domain.Entidades
 {
     public class Cliente : Pessoa
     {
+
         public Cliente()
             :base()
         {
@@ -18,8 +19,9 @@ namespace SGFP.Domain.Entidades
                 : base(clienteRequest)
         {
             Carro = clienteRequest.Carro;
-
             Avaliacao = clienteRequest.Avaliacao;
+
+            var a = this.Notifications;
         }
 
         public Carro Carro { get; private set; }

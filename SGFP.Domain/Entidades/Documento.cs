@@ -1,6 +1,15 @@
-﻿namespace SGFP.Domain.Entidades
+﻿using prmToolkit.NotificationPattern;
+using System;
+
+namespace SGFP.Domain.Entidades
 {
-    public class Documento
+    public class Documento : Notifiable 
     {
+        protected Documento()
+        {
+
+        }
+
+        public Guid Id { get; set; }
     }
 }

@@ -9,6 +9,12 @@ namespace SGFP.Domain.Entidades
 {
     public class Carro : Notifiable
     {
+
+        protected Carro()
+        {
+
+        }
+
         public Carro(CarroRequest carroRequest)
         {
             Id          = carroRequest.Id;

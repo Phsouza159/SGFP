@@ -4,6 +4,11 @@ namespace SGFP.Domain.Entidades
 {
     public class Estado
     {
+        public Estado()
+        {
+
+        }
+
         public Estado(Guid id, string sigla, string nome, Pais pais)
         {
             Id = id;

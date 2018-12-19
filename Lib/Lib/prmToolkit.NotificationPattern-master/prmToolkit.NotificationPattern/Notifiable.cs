@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace prmToolkit.NotificationPattern
 {
@@ -10,6 +11,7 @@ namespace prmToolkit.NotificationPattern
 
         protected Notifiable() { _notifications = new List<Notification>(); }
 
+        [NotMappedAttribute]
         public IReadOnlyCollection<Notification> Notifications => _notifications;
 
         /// <summary>

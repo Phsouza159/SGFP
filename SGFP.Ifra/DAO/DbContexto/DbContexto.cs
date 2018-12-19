@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using SGFP.Domain.Entidades;
+using SGFP.Domain.Entidades.Base;
 using SGFP.Infra.DAO.Map;
 
 namespace SGFP.Infra.DAO.DbContexto
@@ -29,22 +30,41 @@ namespace SGFP.Infra.DAO.DbContexto
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AvaliacaoMap() );
+            modelBuilder.Entity<Pessoa>().Ignore( e => e.Notifications);
+            modelBuilder.Entity<Pessoa>().HasKey(e => e.Id).HasName("ID");
+
+            modelBuilder.ApplyConfiguration(new AvaliacaoMap());
+
+            modelBuilder.ApplyConfiguration(new CarroMap());
+
+            modelBuilder.ApplyConfiguration(new CidadeMap());
+
+            //modelBuilder.ApplyConfiguration(new PessoaMap());
+
+            modelBuilder.ApplyConfiguration(new ClienteMap());
+
+            modelBuilder.ApplyConfiguration(new DocumentoMap());
+
+            modelBuilder.ApplyConfiguration(new EmailMap());
+
+            modelBuilder.ApplyConfiguration(new EnderecoMap());
         }
 
         public DbSet<Avaliacao> Avalicao { get; set; }
 
-        //public DbSet<Carro> Carro { get; set; }
+        public DbSet<Carro> Carro { get; set; }
 
-        //public DbSet<Cidade> Cidade { get; set; }
+        public DbSet<Cidade> Cidade { get; set; }
 
-        //public DbSet<Cliente> Cliente { get; set; }
+        //public DbSet<Pessoa> Pessoa { get; set; }
 
-        //public DbSet<Documento> Documento { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
 
-        //public DbSet<Email> Email { get; set; }
+        public DbSet<Documento> Documento { get; set; }
 
-        //public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Email> Email { get; set; }
+
+        public DbSet<Endereco> Endereco { get; set; }
 
         //public DbSet<Estado> Estado { get; set; }
 

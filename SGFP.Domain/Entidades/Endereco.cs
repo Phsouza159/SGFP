@@ -8,6 +8,11 @@ namespace SGFP.Domain.Entidades
 {
     public class Endereco : Notifiable
     {
+        protected Endereco()
+        {
+
+        }
+
         public Endereco(EnderecoRequest enderecoRequest)
         {
             Id          = enderecoRequest.Id;
