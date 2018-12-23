@@ -9,6 +9,11 @@ namespace SGFP.Domain.Entidades
 {
     public class Funcionario : Pessoa
     {
+        protected Funcionario()
+        {
+
+        }
+
         public Funcionario(FuncionarioRequest funcionarioRequest)
             : base(funcionarioRequest)
         {

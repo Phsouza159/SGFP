@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace SGFP.Domain.Interfaces.Commom
 {
@@ -8,16 +11,24 @@ namespace SGFP.Domain.Interfaces.Commom
 
        bool Update(T ob);
 
-       bool IdExist(int id);
+       bool IdExist(Guid id);
 
-       bool delete(int id);
+       bool delete(T ob);
 
        ICollection<T> GetAll();
 
-       T getById(int id);
+       T getById(Guid id);
 
-       bool Inativar(int id);
+        void BeginTransition();
 
-       bool Ativar(int id);
+        void RowlBack();
+
+        bool Commit();
+
+        T ObterPor(Func<T, bool> where, params Expression<Func<T, object>>[] includeProperties);
+
+        IQueryable<T> Listar(params Expression<Func<T, object>>[] includeProperties);
+
+        IQueryable<T> Include(IQueryable<T> query, params Expression<Func<T, object>>[] includeProperties);
     }
 }

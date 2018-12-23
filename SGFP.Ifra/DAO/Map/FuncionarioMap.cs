@@ -1,20 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 using SGFP.Domain.Entidades;
 
 namespace SGFP.Infra.DAO.Map
 {
-    public class ClienteMap : IEntityTypeConfiguration<Cliente>
+    public class FuncionarioMap : IEntityTypeConfiguration<Funcionario>
     {
-        public void Configure(EntityTypeBuilder<Cliente> builder)
+        public void Configure(EntityTypeBuilder<Funcionario> builder)
         {
-            builder.ToTable("SGFP_004_CLIENTE");
+            builder.ToTable("SGFP_009_FUNCIONARIO");
 
             builder.Ignore(p => p.Notifications);
 
             builder
                  .HasIndex(p => p.Id)
-                 .HasName("PK_004");
+                 .HasName("PK_009");
 
             builder
                 .Property(p => p.PrimeiroNome)
@@ -52,6 +52,11 @@ namespace SGFP.Infra.DAO.Map
                 .HasColumnType("bit")
                 .IsRequired();
 
+            builder
+                .Property(p => p.Categoria)
+                .HasColumnName("CATEGORIA")
+                .HasColumnType("int")
+                .IsRequired();
         }
     }
 }

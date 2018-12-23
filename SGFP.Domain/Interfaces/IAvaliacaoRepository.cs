@@ -3,7 +3,7 @@ using SGFP.Domain.Interfaces.Commom;
 
 namespace SGFP.Domain.Interfaces
 {
-    interface IAvaliacaoRepository : IBaseRepository<Avaliacao>
+    public interface IAvaliacaoRepository : IBaseRepository<Avaliacao>
     {
 
     }

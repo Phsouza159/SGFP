@@ -8,6 +8,11 @@ namespace SGFP.Domain.Entidades
 {
     public class MaoDeObra : Notifiable
     {
+        protected MaoDeObra()
+        {
+
+        }
+
         public MaoDeObra(MaoDeObraRequest maoDeObraRequest)
         {
             Id              = maoDeObraRequest.Id;

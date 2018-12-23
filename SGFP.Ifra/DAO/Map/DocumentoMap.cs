@@ -15,9 +15,9 @@ namespace SGFP.Infra.DAO.Map
 
             builder.Ignore(p => p.Notifications);
 
-            builder
-                .HasKey(p => p.Id)
-                .HasName("ID");
+            //builder
+            //    .HasIndex(p => p.Id)
+            //    .HasName("PK_005");
 
         }
     }

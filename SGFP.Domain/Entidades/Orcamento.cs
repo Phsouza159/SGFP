@@ -8,6 +8,11 @@ namespace SGFP.Domain.Entidades
 {
     public class Orcamento
     {
+        protected Orcamento()
+        {
+
+        }
+
         public Orcamento(OrcamentoRequest orcamentoRequest)
         {
             Id          = orcamentoRequest.Id;

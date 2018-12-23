@@ -11,8 +11,8 @@ namespace SGFP.Infra.DAO.Map
             builder.ToTable("SGFP_003_CIDADE");
 
             builder
-                .HasKey(p => p.Id)
-                .HasName("ID");
+                 .HasIndex(p => p.Id)
+                 .HasName("PK_003");
 
             builder
                 .Property(p => p.Nome)

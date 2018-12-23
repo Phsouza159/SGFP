@@ -5,7 +5,7 @@ namespace SGFP.Domain.Entidades
     public class Pais
     {
 
-        public Pais()
+        protected Pais()
         {
 
         }

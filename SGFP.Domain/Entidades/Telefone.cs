@@ -6,6 +6,11 @@ namespace SGFP.Domain.Entidades
 {
     public class Telefone
     {
+        protected Telefone()
+        {
+
+        }
+
         public Telefone(Guid id, string dDD, string numero, int tipoTelefone)
         {
             Id = id;

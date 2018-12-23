@@ -33,8 +33,10 @@ namespace SGFP.Infra.Migrations
                         .HasColumnName("TEXTO")
                         .HasColumnType("varchar(255)");
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .HasName("PK_001");
 
                     b.ToTable("SGFP_001_AVALIACAO");
                 });
@@ -131,10 +133,12 @@ namespace SGFP.Infra.Migrations
                         .HasColumnName("PLACA")
                         .HasColumnType("varchar(8)");
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("DonoId");
+
+                    b.HasIndex("Id")
+                        .HasName("PK_002");
 
                     b.ToTable("SGFP_002_CARRO");
                 });
@@ -151,10 +155,12 @@ namespace SGFP.Infra.Migrations
                         .HasColumnName("NOME")
                         .HasColumnType("varchar(35)");
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("EstadoId");
+
+                    b.HasIndex("Id")
+                        .HasName("PK_003");
 
                     b.ToTable("SGFP_003_CIDADE");
                 });
@@ -164,8 +170,7 @@ namespace SGFP.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("SGFP_005_DOCUMENTO");
                 });
@@ -185,8 +190,10 @@ namespace SGFP.Infra.Migrations
                         .HasColumnName("SENHA")
                         .HasColumnType("varchar(150)");
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .HasName("PK_006");
 
                     b.ToTable("SGFP_006_EMAIL");
                 });
@@ -216,10 +223,12 @@ namespace SGFP.Infra.Migrations
                         .HasColumnName("MUNICIPIO")
                         .HasColumnType("varchar(25)");
 
-                    b.HasKey("Id")
-                        .HasName("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("CidadeId");
+
+                    b.HasIndex("Id")
+                        .HasName("PK_007");
 
                     b.ToTable("SGFP_007_ENDERECO");
                 });
@@ -229,17 +238,112 @@ namespace SGFP.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("NOME")
+                        .HasColumnType("varchar(15)");
 
                     b.Property<Guid?>("PaisId");
 
-                    b.Property<string>("Sigla");
+                    b.Property<string>("Sigla")
+                        .IsRequired()
+                        .HasColumnName("SIGLA")
+                        .HasColumnType("char(2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_008");
 
                     b.HasIndex("PaisId");
 
-                    b.ToTable("Estado");
+                    b.ToTable("SGFP_008_ESTADO");
+                });
+
+            modelBuilder.Entity("SGFP.Domain.Entidades.MaoDeObra", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnName("FLAG_ATIVO")
+                        .HasColumnType("bit");
+
+                    b.Property<double?>("JornadaTrabalho")
+                        .HasColumnName("JORNADA_TRABALHO")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("LimiteHoraExtra")
+                        .HasColumnName("LIMITE_HORA_EXTRA")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("NOME")
+                        .HasColumnType("varchar(25)");
+
+                    b.Property<string>("TipoMaoObra")
+                        .IsRequired()
+                        .HasColumnName("TIPO_MAO_OBRA")
+                        .HasColumnType("varchar(25)");
+
+                    b.Property<double?>("Valor")
+                        .HasColumnName("VALOR")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ValorHoraExtra")
+                        .HasColumnName("VALOR_HORA_EXTRA")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id")
+                        .HasName("PK_010");
+
+                    b.ToTable("SGFP_010_MAO_DE_OBRA");
+                });
+
+            modelBuilder.Entity("SGFP.Domain.Entidades.Orcamento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("CarroId");
+
+                    b.Property<Guid?>("ClienteId");
+
+                    b.Property<Guid?>("DocumentoId");
+
+                    b.Property<DateTime>("Entrada")
+                        .HasColumnName("ENTRADA")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("Entrega")
+                        .HasColumnName("ENTREGA")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ListaOrcamento")
+                        .HasColumnName("LISTA_ORCAMENTO")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid?>("ServicoId");
+
+                    b.Property<int>("Status")
+                        .HasColumnName("STATUS")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ValorOrcamento")
+                        .HasColumnName("VALOR_ORCAMENTO")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id")
+                        .HasName("PK_011");
+
+                    b.HasIndex("CarroId");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("DocumentoId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("SGFP_011_ORCAMENTO");
                 });
 
             modelBuilder.Entity("SGFP.Domain.Entidades.Pais", b =>
@@ -247,13 +351,40 @@ namespace SGFP.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("NOME")
+                        .HasColumnType("varchar(25)");
 
-                    b.Property<string>("Sigla");
+                    b.Property<string>("Sigla")
+                        .IsRequired()
+                        .HasColumnName("SIGLA")
+                        .HasColumnType("char(3)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_012");
 
-                    b.ToTable("Pais");
+                    b.ToTable("SGFP_012_PAIS");
+                });
+
+            modelBuilder.Entity("SGFP.Domain.Entidades.Servico", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("NomeServico")
+                        .IsRequired()
+                        .HasColumnName("NOME_SERVICO")
+                        .HasColumnType("varchar(35)");
+
+                    b.Property<double>("Valor")
+                        .HasColumnName("VALOR")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id")
+                        .HasName("PK_013");
+
+                    b.ToTable("SGFP_013_SERVICO");
                 });
 
             modelBuilder.Entity("SGFP.Domain.Entidades.Telefone", b =>
@@ -261,15 +392,24 @@ namespace SGFP.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DDD");
+                    b.Property<string>("DDD")
+                        .IsRequired()
+                        .HasColumnName("DDD")
+                        .HasColumnType("char(3)");
 
-                    b.Property<string>("Numero");
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnName("NUMERO")
+                        .HasColumnType("char(10)");
 
-                    b.Property<int>("TipoTelefone");
+                    b.Property<int>("TipoTelefone")
+                        .HasColumnName("TIPO_TELEFONE")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_014");
 
-                    b.ToTable("Telefone");
+                    b.ToTable("SGFP_014_TELEFONE");
                 });
 
             modelBuilder.Entity("SGFP.Domain.Entidades.Cliente", b =>
@@ -284,9 +424,28 @@ namespace SGFP.Infra.Migrations
 
                     b.HasIndex("CarroId");
 
+                    b.HasIndex("Id")
+                        .HasName("PK_004");
+
                     b.ToTable("SGFP_004_CLIENTE");
 
                     b.HasDiscriminator().HasValue("Cliente");
+                });
+
+            modelBuilder.Entity("SGFP.Domain.Entidades.Funcionario", b =>
+                {
+                    b.HasBaseType("SGFP.Domain.Entidades.Base.Pessoa");
+
+                    b.Property<int>("Categoria")
+                        .HasColumnName("CATEGORIA")
+                        .HasColumnType("int");
+
+                    b.HasIndex("Id")
+                        .HasName("PK_009");
+
+                    b.ToTable("SGFP_009_FUNCIONARIO");
+
+                    b.HasDiscriminator().HasValue("Funcionario");
                 });
 
             modelBuilder.Entity("SGFP.Domain.Entidades.Base.Pessoa", b =>
@@ -330,6 +489,25 @@ namespace SGFP.Infra.Migrations
                     b.HasOne("SGFP.Domain.Entidades.Pais", "Pais")
                         .WithMany()
                         .HasForeignKey("PaisId");
+                });
+
+            modelBuilder.Entity("SGFP.Domain.Entidades.Orcamento", b =>
+                {
+                    b.HasOne("SGFP.Domain.Entidades.Carro", "Carro")
+                        .WithMany()
+                        .HasForeignKey("CarroId");
+
+                    b.HasOne("SGFP.Domain.Entidades.Base.Pessoa", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("SGFP.Domain.Entidades.Documento", "Documento")
+                        .WithMany()
+                        .HasForeignKey("DocumentoId");
+
+                    b.HasOne("SGFP.Domain.Entidades.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId");
                 });
 
             modelBuilder.Entity("SGFP.Domain.Entidades.Cliente", b =>

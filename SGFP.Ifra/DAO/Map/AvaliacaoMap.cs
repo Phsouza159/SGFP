@@ -13,8 +13,8 @@ namespace SGFP.Infra.DAO.Map
             builder.Ignore(p => p.Notifications);
 
             builder
-                .HasKey(p => p.Id)
-                .HasName("ID");
+                 .HasIndex(p => p.Id)
+                 .HasName("PK_001");
 
             builder.Property(p => p.Nota)
                 .HasColumnName("NOTA")

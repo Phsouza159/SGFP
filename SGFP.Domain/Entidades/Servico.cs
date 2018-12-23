@@ -5,6 +5,10 @@ namespace SGFP.Domain.Entidades
 {
     public class Servico
     {
+        protected Servico()
+        {
+
+        }
         public Servico(ServicoRequest servicoRequest)
         {
             Id      = servicoRequest.Id;

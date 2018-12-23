@@ -3,21 +3,21 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SGFP.Infra.Migrations
 {
-    public partial class mapEntidades : Migration
+    public partial class mapCompleto : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Pais",
+                name: "SGFP_001_AVALIACAO",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Sigla = table.Column<string>(nullable: true),
-                    Nome = table.Column<string>(nullable: true)
+                    NOTA = table.Column<int>(type: "int", nullable: false),
+                    TEXTO = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pais", x => x.Id);
+                    table.PrimaryKey("PK_SGFP_001_AVALIACAO", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -28,7 +28,7 @@ namespace SGFP.Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ID", x => x.Id);
+                    table.PrimaryKey("PK_SGFP_005_DOCUMENTO", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,39 +41,83 @@ namespace SGFP.Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ID", x => x.Id);
+                    table.PrimaryKey("PK_SGFP_006_EMAIL", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Telefone",
+                name: "SGFP_010_MAO_DE_OBRA",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    DDD = table.Column<string>(nullable: true),
-                    Numero = table.Column<string>(nullable: true),
-                    TipoTelefone = table.Column<int>(nullable: false)
+                    TIPO_MAO_OBRA = table.Column<string>(type: "varchar(25)", nullable: false),
+                    NOME = table.Column<string>(type: "varchar(25)", nullable: false),
+                    VALOR = table.Column<double>(type: "float", nullable: true),
+                    JORNADA_TRABALHO = table.Column<double>(type: "float", nullable: true),
+                    VALOR_HORA_EXTRA = table.Column<double>(type: "float", nullable: true),
+                    LIMITE_HORA_EXTRA = table.Column<double>(type: "float", nullable: true),
+                    FLAG_ATIVO = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Telefone", x => x.Id);
+                    table.PrimaryKey("PK_010", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Estado",
+                name: "SGFP_012_PAIS",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Sigla = table.Column<string>(nullable: true),
-                    Nome = table.Column<string>(nullable: true),
+                    SIGLA = table.Column<string>(type: "char(3)", nullable: false),
+                    NOME = table.Column<string>(type: "varchar(25)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_012", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SGFP_013_SERVICO",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    NOME_SERVICO = table.Column<string>(type: "varchar(35)", nullable: false),
+                    VALOR = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_013", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SGFP_014_TELEFONE",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    DDD = table.Column<string>(type: "char(3)", nullable: false),
+                    NUMERO = table.Column<string>(type: "char(10)", nullable: false),
+                    TIPO_TELEFONE = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_014", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SGFP_008_ESTADO",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    SIGLA = table.Column<string>(type: "char(2)", nullable: false),
+                    NOME = table.Column<string>(type: "varchar(15)", nullable: false),
                     PaisId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Estado", x => x.Id);
+                    table.PrimaryKey("PK_008", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Estado_Pais_PaisId",
+                        name: "FK_SGFP_008_ESTADO_SGFP_012_PAIS_PaisId",
                         column: x => x.PaisId,
-                        principalTable: "Pais",
+                        principalTable: "SGFP_012_PAIS",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -88,11 +132,11 @@ namespace SGFP.Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ID", x => x.Id);
+                    table.PrimaryKey("PK_SGFP_003_CIDADE", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SGFP_003_CIDADE_Estado_EstadoId",
+                        name: "FK_SGFP_003_CIDADE_SGFP_008_ESTADO_EstadoId",
                         column: x => x.EstadoId,
-                        principalTable: "Estado",
+                        principalTable: "SGFP_008_ESTADO",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -110,7 +154,7 @@ namespace SGFP.Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ID", x => x.Id);
+                    table.PrimaryKey("PK_SGFP_007_ENDERECO", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SGFP_007_ENDERECO_SGFP_003_CIDADE_CidadeId",
                         column: x => x.CidadeId,
@@ -134,7 +178,7 @@ namespace SGFP.Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ID", x => x.Id);
+                    table.PrimaryKey("PK_SGFP_002_CARRO", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,7 +197,8 @@ namespace SGFP.Infra.Migrations
                     TelefoneId = table.Column<Guid>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
                     CarroId = table.Column<Guid>(nullable: true),
-                    AvaliacaoId = table.Column<Guid>(nullable: true)
+                    AvaliacaoId = table.Column<Guid>(nullable: true),
+                    CATEGORIA = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,9 +216,9 @@ namespace SGFP.Infra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Pessoa_Telefone_TelefoneId",
+                        name: "FK_Pessoa_SGFP_014_TELEFONE_TelefoneId",
                         column: x => x.TelefoneId,
-                        principalTable: "Telefone",
+                        principalTable: "SGFP_014_TELEFONE",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -190,10 +235,49 @@ namespace SGFP.Infra.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Estado_PaisId",
-                table: "Estado",
-                column: "PaisId");
+            migrationBuilder.CreateTable(
+                name: "SGFP_011_ORCAMENTO",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    ClienteId = table.Column<Guid>(nullable: true),
+                    CarroId = table.Column<Guid>(nullable: true),
+                    ServicoId = table.Column<Guid>(nullable: true),
+                    LISTA_ORCAMENTO = table.Column<string>(type: "varchar(255)", nullable: true),
+                    DocumentoId = table.Column<Guid>(nullable: true),
+                    ENTRADA = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ENTREGA = table.Column<DateTime>(type: "datetime", nullable: false),
+                    VALOR_ORCAMENTO = table.Column<double>(type: "float", nullable: false),
+                    STATUS = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_011", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SGFP_011_ORCAMENTO_SGFP_002_CARRO_CarroId",
+                        column: x => x.CarroId,
+                        principalTable: "SGFP_002_CARRO",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SGFP_011_ORCAMENTO_Pessoa_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Pessoa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SGFP_011_ORCAMENTO_SGFP_005_DOCUMENTO_DocumentoId",
+                        column: x => x.DocumentoId,
+                        principalTable: "SGFP_005_DOCUMENTO",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SGFP_011_ORCAMENTO_SGFP_013_SERVICO_ServicoId",
+                        column: x => x.ServicoId,
+                        principalTable: "SGFP_013_SERVICO",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pessoa_EmailId",
@@ -221,9 +305,29 @@ namespace SGFP.Infra.Migrations
                 column: "CarroId");
 
             migrationBuilder.CreateIndex(
+                name: "PK_004",
+                table: "Pessoa",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "PK_009",
+                table: "Pessoa",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "PK_001",
+                table: "SGFP_001_AVALIACAO",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SGFP_002_CARRO_DonoId",
                 table: "SGFP_002_CARRO",
                 column: "DonoId");
+
+            migrationBuilder.CreateIndex(
+                name: "PK_002",
+                table: "SGFP_002_CARRO",
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SGFP_003_CIDADE_EstadoId",
@@ -231,9 +335,49 @@ namespace SGFP.Infra.Migrations
                 column: "EstadoId");
 
             migrationBuilder.CreateIndex(
+                name: "PK_003",
+                table: "SGFP_003_CIDADE",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "PK_006",
+                table: "SGFP_006_EMAIL",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SGFP_007_ENDERECO_CidadeId",
                 table: "SGFP_007_ENDERECO",
                 column: "CidadeId");
+
+            migrationBuilder.CreateIndex(
+                name: "PK_007",
+                table: "SGFP_007_ENDERECO",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SGFP_008_ESTADO_PaisId",
+                table: "SGFP_008_ESTADO",
+                column: "PaisId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SGFP_011_ORCAMENTO_CarroId",
+                table: "SGFP_011_ORCAMENTO",
+                column: "CarroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SGFP_011_ORCAMENTO_ClienteId",
+                table: "SGFP_011_ORCAMENTO",
+                column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SGFP_011_ORCAMENTO_DocumentoId",
+                table: "SGFP_011_ORCAMENTO",
+                column: "DocumentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SGFP_011_ORCAMENTO_ServicoId",
+                table: "SGFP_011_ORCAMENTO",
+                column: "ServicoId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SGFP_002_CARRO_Pessoa_DonoId",
@@ -247,10 +391,6 @@ namespace SGFP.Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Estado_Pais_PaisId",
-                table: "Estado");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Pessoa_SGFP_006_EMAIL_EmailId",
                 table: "Pessoa");
 
@@ -259,7 +399,11 @@ namespace SGFP.Infra.Migrations
                 table: "Pessoa");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Pessoa_Telefone_TelefoneId",
+                name: "FK_Pessoa_SGFP_014_TELEFONE_TelefoneId",
+                table: "Pessoa");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Pessoa_SGFP_001_AVALIACAO_AvaliacaoId",
                 table: "Pessoa");
 
             migrationBuilder.DropForeignKey(
@@ -267,10 +411,16 @@ namespace SGFP.Infra.Migrations
                 table: "Pessoa");
 
             migrationBuilder.DropTable(
+                name: "SGFP_010_MAO_DE_OBRA");
+
+            migrationBuilder.DropTable(
+                name: "SGFP_011_ORCAMENTO");
+
+            migrationBuilder.DropTable(
                 name: "SGFP_005_DOCUMENTO");
 
             migrationBuilder.DropTable(
-                name: "Pais");
+                name: "SGFP_013_SERVICO");
 
             migrationBuilder.DropTable(
                 name: "SGFP_006_EMAIL");
@@ -282,10 +432,16 @@ namespace SGFP.Infra.Migrations
                 name: "SGFP_003_CIDADE");
 
             migrationBuilder.DropTable(
-                name: "Estado");
+                name: "SGFP_008_ESTADO");
 
             migrationBuilder.DropTable(
-                name: "Telefone");
+                name: "SGFP_012_PAIS");
+
+            migrationBuilder.DropTable(
+                name: "SGFP_014_TELEFONE");
+
+            migrationBuilder.DropTable(
+                name: "SGFP_001_AVALIACAO");
 
             migrationBuilder.DropTable(
                 name: "SGFP_002_CARRO");
